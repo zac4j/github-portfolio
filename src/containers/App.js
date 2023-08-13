@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Profile from "./Profile";
 import Header from "../components/Header/Header";
+import Board from "./Board";
 
 const AppWrapper = styled.div`
   text-align: center;
@@ -25,7 +26,7 @@ class App extends Component {
         <GlobalStyle />
         <AppWrapper>
           <Header />
-          <Profile />
+          <Board />
         </AppWrapper>
       </>
     );
