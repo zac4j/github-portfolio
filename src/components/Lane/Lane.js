@@ -31,18 +31,25 @@ const Alert = styled.div`
   text-align: center;
 `;
 
-const Lane = ({ title, ticket }) => (
-  <LaneWrapper>
+const Lane = ({
+  laneId,
+  tickets,
+  title,
+  loading,
+  error,
+  onDragStart,
+  onDragOver,
+  onDrop,
+}) => (
+  <LaneWrapper onDragOver={onDragOver} onDrop={(e) => onDrop(e, laneId)}>
     <Title>{title}</Title>
-    <Ticket ticket={ticket} />
+    {(loading || error) && <Alert>{loading ? "Loading..." : error}</Alert>}
+    <TicketsWrapper>
+      {tickets.map((ticket) => (
+        <Ticket key={ticket.id} onDragStart={onDragStart} ticket={ticket} />
+      ))}
+    </TicketsWrapper>
   </LaneWrapper>
 );
 
 export default Lane;
-
-/* {(loading || error) && <Alert>{loading ? "Loading..." : error}</Alert>}
-<TicketsWrapper>
-{tickets.map((ticket) => (
-  <Ticket ticket={tickets} />
-))}
-</TicketsWrapper>*/
