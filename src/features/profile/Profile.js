@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Link from "../components/Link/Link";
-import List from "../components/List/List";
+import Link from "../../components/Link/Link";
+import List from "../../components/List/List";
 import styled from "styled-components";
-import Board from "./Board";
 
 const ProfileWrapper = styled.div`
   width: 50%;
@@ -71,7 +70,6 @@ class Profile extends Component {
         <Avatar className="Profile-avatar" src={data.avatar_url} alt="avatar" />
         <List title="Profile" items={items} />
         <List title="Projects" items={projects} />
-        <Board />
       </ProfileWrapper>
     );
   }

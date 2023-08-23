@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import logo from "../../GitHub-Mark-Light-64px.png";
 import styled from "styled-components";
 
@@ -18,15 +18,11 @@ const Logo = styled.img`
   pointer-events: none;
 `;
 
-class Header extends Component {
-  render() {
-    return (
-      <HeaderWrapper>
-        <Logo src={logo} alt="logo" className="App-logo" />
-        <h1>Github Portfolio</h1>
-      </HeaderWrapper>
-    );
-  }
-}
+const Header = ({ title }) => (
+  <HeaderWrapper>
+    <Logo src={logo} alt="logo" className="App-logo" />
+    <h1>{title}</h1>
+  </HeaderWrapper>
+);
 
 export default Header;

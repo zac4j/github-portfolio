@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import withDataFetching from "../withDataFetching";
-import Ticket from "../components/Ticket/Ticket";
+import withDataFetching from "../../withDataFetching";
+import Ticket from "../../components/Ticket/Ticket";
 
 const TicketsWrapper = styled.div`
   display: flex;

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Tickets from "./Tickets";
 import Header from "../components/Header/Header";
-import Board from "./Board";
-import Profile from "./Profile";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Feed from "../features/feed/Feed";
+import Profile from "../features/profile/Profile";
+import ProjectBoard from "../features/projectmgt/ProjectBoard";
 
 const AppWrapper = styled.div`
   text-align: center;
@@ -33,11 +34,14 @@ class App extends Component {
       <>
         <GlobalStyle />
         <AppWrapper>
-          <Header />
-          {/* <Profile /> */}
-          <h2>GitHub project management</h2>
-          <Board lanes={lanes} dataSource={"./data.json"} />
-          <Tickets dataSource={"./data.json"} />
+          <Header title={"GitHub"} />
+          <Router>
+            <Routes>
+              <Route path="/feed" Component={Feed} />
+              <Route path="/profile" Component={Profile} />
+              <Route path="/board" Component={ProjectBoard} />
+            </Routes>
+          </Router>
         </AppWrapper>
       </>
     );
