@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Feed from "../features/feed/Feed";
 import Profile from "../features/profile/Profile";
 import ProjectBoard from "../features/projectmgt/ProjectBoard";
+import Question from "../features/feed/Question";
 
 const AppWrapper = styled.div`
   text-align: center;
@@ -38,6 +39,7 @@ class App extends Component {
           <Router>
             <Routes>
               <Route path="/feed" Component={Feed} />
+              <Route path="/questions/:id" Component={Question} />
               <Route path="/profile" Component={Profile} />
               <Route path="/board" Component={ProjectBoard} />
             </Routes>
