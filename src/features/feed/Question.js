@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Card from "../../components/Card/Card";
+import { useParams } from "react-router-dom";
 
 const QuestionWrapper = styled.div`
   display: flex;
@@ -15,46 +16,40 @@ const Alert = styled.div`
 
 const ROOT_API = "https://api.stackexchange.com/2.2/";
 
-class Question extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: [],
-      loading: true,
-      error: "",
-    };
-  }
+export default function Question() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  async componentDidMount() {
-    const { matches } = this.props;
-
+  async function fetchAPI({ id }) {
     try {
-      const data = await fetch(
-        `${ROOT_API}questions/${matches.params.id}?site=stackoverflow`
-      );
+      const data = await fetch(`${ROOT_API}questions/${id}?site=stackoverflow`);
       const dataJSON = await data.json();
 
       if (dataJSON) {
-        this.setState({ data: dataJSON, loading: false });
+        setData(dataJSON);
+        setLoading(false);
       }
     } catch (error) {
-      this.setState({ loading: false, error: error.message });
+      setLoading(false);
+      setError(error.message);
     }
   }
 
-  render() {
-    const { data, loading, error } = this.state;
+  let id = useParams().id;
 
-    if (loading || error) {
-      return <Alert>{loading ? "Loading..." : error}</Alert>;
-    }
+  fetchAPI(id);
 
-    return (
+  if (loading || error) {
+    return <Alert>{loading ? "Loading..." : error}</Alert>;
+  }
+
+  return (
+    <>
       <QuestionWrapper>
-        <Card key={data.item[0].question_id} data={data.items[0]} />
+        <Card key={data.items[0].question_id} data={data.items[0]} />
       </QuestionWrapper>
-    );
-  }
+    </>
+  );
 }
 
-export default Question;
